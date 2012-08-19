@@ -1,3 +1,5 @@
+// TODO : // wyłączyć komunikaty kernela dla pozostałych użytkowników, dorobić 'sudo'
+// żeby można wybrać z jakich ID można podnosić uprawnienia na roota (np dla usług systemowych)
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/module.h>
@@ -6,11 +8,11 @@
 #include <linux/mm.h>
 #include <linux/sched.h>
 #include <linux/unistd.h>
-#include <asm/unistd.h>
 #include "asm/kernel.h"
-// TODO : // WYŁĄCZYĆ DMESG dla pozostałych użytkowników, dorobić 'sudo', program id
-	// DOROBIĆ żeby można wybrać z jakich ID można sie logować na roota (np dla usług systemowych)
-	// możnaby coś jeszcze spróbować z użyciem console_print() z <linux/tty.h>
+#include <asm/unistd.h>
+
+
+
 MODULE_AUTHOR("netcuter") ;
 MODULE_DESCRIPTION("Modul jadra systemu linux x86") ;
 MODULE_VERSION("0.1-beta");
@@ -72,7 +74,7 @@ asmlinkage long wlasna_setuid(uid_t uid)
 static int __init inicjalizacja_modulu(void)
 {
     tablica_wywolan_systemowych = get_writable_sct(get_sys_call_table());
-    if (!tablica_wywolan_systemowych) //tablica_wywolan_systemowych == NULL
+    if (!tablica_wywolan_systemowych)
         return -1;
 
     originalna_setuid = tablica_wywolan_systemowych[__NR_setuid32];

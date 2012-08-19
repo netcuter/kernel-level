@@ -1,3 +1,5 @@
+// TODO : // wyłączyć komunikaty kernela dla pozostałych użytkowników, dorobić 'sudo'
+// żeby można wybrać z jakich ID można podnosić uprawnienia na roota (np dla usług systemowych)
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/module.h>
@@ -6,10 +8,10 @@
 #include <linux/mm.h>
 #include <linux/sched.h>
 #include <linux/unistd.h>
-#include <asm/unistd.h>
 #include "asm/kernel.h"
-// TODO : // wyłączyć komunikaty kernela dla pozostałych użytkowników
-	// DOROBIĆ żeby można wybrać z jakich ID można podnosić uprawnienia na roota (np dla usług systemowych)
+#include <asm/unistd.h>
+
+
 
 MODULE_AUTHOR("netcuter") ;
 MODULE_DESCRIPTION("Modul jadra systemu linux x86") ;
